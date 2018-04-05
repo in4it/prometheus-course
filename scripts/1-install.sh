@@ -6,9 +6,8 @@ cd prometheus-2.2.1.linux-amd64/
 # if you just want to start prometheus as root
 #./prometheus --config.file=prometheus.yml
 
-# create users
+# create user
 useradd --no-create-home --shell /bin/false prometheus
-useradd --no-create-home --shell /bin/false node_exporter
 
 # create directories
 mkdir -p /etc/prometheus
