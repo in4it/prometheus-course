@@ -7,7 +7,7 @@ cd prometheus-2.2.1.linux-amd64/
 #./prometheus --config.file=prometheus.yml
 
 # create user
-useradd --no-create-home --shell /bin/false prometheus
+useradd --no-create-home --shell /bin/false prometheus 
 
 # create directories
 mkdir -p /etc/prometheus
@@ -53,3 +53,4 @@ WantedBy=multi-user.target' > /etc/systemd/system/prometheus.service
 
 systemctl daemon-reload
 systemctl enable prometheus
+systemctl start prometheus
