@@ -58,3 +58,15 @@ mv ca.key /etc/ssl/private/prometheus-ca.key
 mv client.key /etc/prometheus/prometheus.key
 chown prometheus:prometheus /etc/prometheus/prometheus.key
 mv client.crt /etc/ssl/certs/prometheus.crt
+
+echo 'Add the following lines to /etc/prometheus/prometheus.yml:'
+echo "  - job_name: 'node_exporter_ssl'
+    scrape_interval: 5s
+    scheme: https
+    tls_config:
+      ca_file: /etc/ssl/certs/prometheus-ca.crt
+      cert_file: /etc/ssl/certs/prometheus.crt
+      key_file: /etc/prometheus/prometheus.key
+    static_configs:
+      - targets: ['${TARGET_IP}:443']"
+
