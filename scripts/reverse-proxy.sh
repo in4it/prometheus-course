@@ -1,5 +1,8 @@
 #!/bin/bash
 
+HOST="localhost"
+PORT="9090"
+
 # run script as root or with sudo
 
 # install nginx and openssl
@@ -17,7 +20,7 @@ echo 'server {
   ssl_certificate /etc/ssl/certs/nginx.pem;
   ssl_certificate_key /etc/ssl/private/nginx.pem;
   location / {
-    proxy_pass http://localhost:9090/;
+    proxy_pass http://'${HOST}':'${PORT}'/;
     auth_basic "Prometheus";
     auth_basic_user_file /etc/nginx/.htpasswd;
   }
@@ -27,4 +30,4 @@ systemctl enable nginx
 systemctl restart nginx
 
 EXTERNAL_IP=$(curl -s ifconfig.co)
-echo "Reverse proxy enabled on http://${EXTERNAL_IP}:19090"
+echo "Reverse proxy enabled on https://${EXTERNAL_IP}"
