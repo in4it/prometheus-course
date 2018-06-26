@@ -63,6 +63,7 @@ global:
   smtp_from: 'alertmanager@prometheus.com'
   smtp_auth_username: ''
   smtp_auth_password: ''
+  smtp_require_tls: false
 
 templates:
 - '/etc/alertmanager/template/*.tmpl'
@@ -89,4 +90,4 @@ alerting:
   - static_configs:
     - targets:
       - localhost:9093"
-      
+
