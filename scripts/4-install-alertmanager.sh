@@ -89,3 +89,4 @@ alerting:
   - static_configs:
     - targets:
       - localhost:9093"
+      

@@ -39,3 +39,4 @@ Add the following lines and substitute with correct values to /etc/alertmanager/
 echo "You successfully installed the mail server" | mail -s "Prometheus mail server OK" <your-email-here>
 If your mail isn't received check the syslog(tail -f /var/log/syslog) and the spam folder.
 "
+
