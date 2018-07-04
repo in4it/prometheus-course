@@ -8,6 +8,13 @@ apt-get install -y openjdk-9-jre-headless
 #create configuration directory
 mkdir /etc/cloudwatchexporter
 touch /etc/cloudwatchexporter/cloudwatchexporter.yml
+mkdir -p ~/.aws/
+touch ~/.aws/credentials
+
+#aws credentail template
+echo'[default]
+aws_access_key_id=YOUR_ACCESS_KEY_ID
+aws_secret_access_key=YOUR_SECRET_ACCESS_KEY' >> ~/.aws/credentials
 
 echo '[Unit]
 Description=CLoudwatch Exporter
@@ -18,28 +25,28 @@ After=network-online.target
 User=root
 Group=root
 Type=simple
-ExecStart=java -jar /usr/local/bin/cloudwatch_exporter.jar 9106 /etc/cloudwatchexporter/cloudwatchexporter.yml
+ExecStart=/usr/bin/java -jar /usr/local/bin/cloudwatch_exporter.jar 9106 /etc/cloudwatchexporter/cloudwatchexporter.yml
 
 [Install]
 WantedBy=multi-user.target' > /etc/systemd/system/cloudwatch_exporter.service
 
 # enable node_exporter in systemctl
 systemctl daemon-reload
-systemctl start cloudwatch_exporter
 systemctl enable cloudwatch_exporter
 
 
-echo "Setup complete.
-Add the following lines to /etc/prometheus/prometheus.yml:
+echo "Installation complete.
+
+- Add your AWS keys to ~/.aws/credentials (IAM permissions needed: cloudwatch:ListMetrics and cloudwatch:GetMetricStatistics needed)
+
+- Add the following lines to /etc/prometheus/prometheus.yml:
 
   - job_name: 'cloudwatch_exporter'
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9106']
 
-AND
-
-Add the following lines to /etc/cloudwatchexporter/cloudwatchexporter.yml:
+- Add the following lines to /etc/cloudwatchexporter/cloudwatchexporter.yml:
 
 ---
 region: eu-west-1
@@ -49,6 +56,8 @@ metrics:
   aws_dimensions: [AvailabilityZone, LoadBalancerName]
   aws_statistics: [Average]
 
-If you want to add config you can reload the cloudwatch_exporter by issuing the following command:
-curl -X POST localhost:9106/-/reload
+- run: systemctl start cloudwatch_exporter
+
+- If you want to add config you can reload the cloudwatch_exporter by issuing the following command:
+  curl -X POST localhost:9106/-/reload
 "
