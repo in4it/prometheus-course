@@ -57,7 +57,4 @@ metrics:
   aws_statistics: [Average]
 
 - run: systemctl start cloudwatch_exporter
-
-- If you want to add config you can reload the cloudwatch_exporter by issuing the following command:
-  curl -X POST localhost:9106/-/reload
 "
