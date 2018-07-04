@@ -6,13 +6,13 @@ wget -O /usr/local/bin/cloudwatch_exporter.jar http://search.maven.org/remotecon
 apt-get install -y openjdk-9-jre-headless
 
 #create configuration directory
-mkdir /etc/cloudwatchexporter
+mkdir -p /etc/cloudwatchexporter
 touch /etc/cloudwatchexporter/cloudwatchexporter.yml
 mkdir -p ~/.aws/
 touch ~/.aws/credentials
 
 #aws credentail template
-echo'[default]
+echo '[default]
 aws_access_key_id=YOUR_ACCESS_KEY_ID
 aws_secret_access_key=YOUR_SECRET_ACCESS_KEY' >> ~/.aws/credentials
 
