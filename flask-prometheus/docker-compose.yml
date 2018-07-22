@@ -1,0 +1,20 @@
+version: '3'
+services:
+  flask-prometheus-example:
+    ports:
+      - "5000:5000"
+      - "8000:8000"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: app
+      MYSQL_DB: app
+    image: "wardviaene/flask-prometheus-example"
+    depends_on: 
+      - mysql
+    command: ["/wait-for-it.sh", "mysql:3306", "--", "python", "./main.py"]
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: app
+      MYSQL_DATABASE: app
