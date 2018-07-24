@@ -11,7 +11,7 @@ useradd --no-create-home --shell /bin/false consul_exporter
 chown consul_exporter:consul_exporter /usr/local/bin/consul_exporter
 
 echo '[Unit]
-Description=Node Exporter
+Description=Consul Exporter
 Wants=network-online.target
 After=network-online.target
 
