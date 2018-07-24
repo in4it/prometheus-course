@@ -17,13 +17,13 @@ Add the following lines to /etc/prometheus/prometheus.yml:
     - source_labels: ['__meta_consul_service']
       regex:         '(.*)'
       target_label:  'job'
-      replacement:   '$1'
+      replacement:   '\$1'
     - source_labels: ['__meta_consul_node']
       regex:         '(.*)'
       target_label:  'instance'
-      replacement:   '$1'
+      replacement:   '\$1'
     - source_labels: ['__meta_consul_tags']
       regex:         ',(dev|production|canary),'
       target_label:  'group'
-      replacement:   '$1'
+      replacement:   '\$1'
 "
