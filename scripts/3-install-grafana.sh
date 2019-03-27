@@ -1,6 +1,6 @@
 #!/bin/bash
-echo 'deb https://packagecloud.io/grafana/stable/debian/ jessie main' >> /etc/apt/sources.list
-curl https://packagecloud.io/gpg.key | sudo apt-key add -
+echo 'deb https://packages.grafana.com/oss/deb stable main' >> /etc/apt/sources.list
+curl https://packages.grafana.com/gpg.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install grafana
 
