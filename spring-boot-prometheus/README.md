@@ -16,6 +16,7 @@ Build and Run the container via `docker build -t spring-demo-app . && docker run
 ## Access
 ### App
 `http://localhost:8080/api/demo`
+`http://localhost:8080/api/delayed/demo`
 
 ### Prometheus metrics
 `http://localhost:8080/actuator/prometheus`
@@ -31,3 +32,6 @@ Build and Run the container via `docker build -t spring-demo-app . && docker run
 
 ### Custom metric
 `runCounter_total{application="prometheus-demo",job="spring_boot_demo_app"}`
+
+### Requests duration for the delayed demo app
+`rate(http_server_requests_seconds_sum{uri="/api/delayed/demo",status="200"}[2m])`
