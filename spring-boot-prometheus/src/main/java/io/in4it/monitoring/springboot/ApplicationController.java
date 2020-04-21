@@ -18,6 +18,8 @@ public class ApplicationController {
     private Counter runCounter = Metrics.counter("runCounter");
 
     @Timed
+    // creates a Timer time series named http_server_requests which by default contains dimensions for the HTTP status of the response, HTTP method, exception type if the request fails, and the pre-variable substitution parameterized endpoint URI.
+    
     @GetMapping("/api/demo")
     public String apiUse() throws InterruptedException {
         runCounter.increment();
