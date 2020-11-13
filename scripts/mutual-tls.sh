@@ -35,7 +35,7 @@ echo -en "IP.1 = ${TARGET_IP}\n" >> openssl-${TARGET_IP}.cnf
 
 
 # create CA
-openssl genrsa -out ca.key 4096 -nodes
+openssl genrsa -out ca.key 4096
 chmod 400 ca.key
 openssl req -new -x509 -sha256 -days 3650 -key ca.key -out ca.crt -subj "/CN=prometheus-ca.example.com"
 chmod 644 ca.crt
